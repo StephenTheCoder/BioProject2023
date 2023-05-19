@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from Bio.Blast.Applications import NcbiblastpCommandline
-from StringIO import StringIO
+from io import StringIO
 from Bio.Blast import NCBIXML
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -22,10 +22,10 @@ blast_result_record = NCBIXML.read(StringIO(output))
 # Print some information on the result
 for alignment in blast_result_record.alignments:
     for hsp in alignment.hsps:
-        print '****Alignment****'
-        print 'sequence:', alignment.title
-        print 'length:', alignment.length
-        print 'e value:', hsp.expect
-        print hsp.query
-        print hsp.match
-        print hsp.sbjct
+        print('****Alignment****')
+        print('sequence:', alignment.title)
+        print('length:', alignment.length)
+        print('e value:', hsp.expect)
+        print(hsp.query)
+        print(hsp.match)
+        print(hsp.sbjct)
