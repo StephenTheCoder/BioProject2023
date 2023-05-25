@@ -1,0 +1,75 @@
+import requests
+
+# Getting each animal name and making a sequence
+x1 = input("What is the first animal? ")
+x2 = input("What is the second animal? ")
+x3 = input("What is the third animal? ")
+x4 = input("What is the fourth animal? ")
+x5 = input("What is the fifth animal? ")
+
+sequences = [x1, x2, x3, x4, x5]
+
+def getVal(name1, name2):
+    
+    # Run the API for the first animal
+    api_url1 = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name1)
+    response1 = requests.get(api_url1, headers={'X-Api-Key': '5GhCE6uxfMlz0dC+BA+NGQ==GDDJ7TtHWDJxEZ0m'})
+    if response1.status_code == requests.codes.ok:
+        data1 = response1.json()
+        species_info1 = data1[0]
+        
+        # Running data for the first animal
+        taxonomy1 = species_info1.get('taxonomy')
+        kingdom1 = taxonomy1.get('kingdom')
+        phylum1 = taxonomy1.get('phylum')
+        class1 = taxonomy1.get('class')
+        order1 = taxonomy1.get('order')
+        family1 = taxonomy1.get('family')
+        genus1 = taxonomy1.get('genus')
+
+    else:
+        # Response fail code
+        print("Error:", response1.status_code, response1.text)
+        
+    # Run the API for the second animal    
+    api_url2 = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name2)
+    response2 = requests.get(api_url2, headers={'X-Api-Key': '5GhCE6uxfMlz0dC+BA+NGQ==GDDJ7TtHWDJxEZ0m'})
+    if response2.status_code == requests.codes.ok:
+        data2 = response2.json()
+        species_info2 = data2[0]
+        
+        # Running data for the second animal
+        taxonomy2 = species_info2.get('taxonomy')
+        kingdom2 = taxonomy2.get('kingdom')
+        phylum2 = taxonomy2.get('phylum')
+        class2 = taxonomy2.get('class')
+        order2 = taxonomy2.get('order')
+        family2 = taxonomy2.get('family')
+        genus2 = taxonomy2.get('genus')
+
+    else:
+        
+        # Response fail code
+        print("Error:", response2.status_code, response2.text)
+    
+    
+    # Running comparison for the z value
+    if(genus1 == genus2):
+        return 1
+    elif(family1 == family2):
+        return 2
+    elif(order1 == order2):
+        return 3
+    elif(class1 == class2):
+        return 4
+    elif(phylum1 == phylum2):
+        return 5
+    elif(kingdom1 == kingdom2):
+        return 6
+    
+# For loop that checks what the z value would be
+for i in range(1, 5):
+    a = sequences[0]
+    b = sequences[i]
+    
+    print("The z value for " + a + " and " + b + " is " + str(getVal(a, b)))
